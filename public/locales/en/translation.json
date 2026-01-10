@@ -681,7 +681,15 @@
     "latestEndDate": "Latest End Date",
     "earliestEndDate": "Earliest End Date",
     "lowestGoal": "Lowest Goal",
+<<<<<<< HEAD
     "highestGoal": "Highest Goal"
+=======
+    "highestGoal": "Highest Goal",
+    "percentageRaised": "% Raised",
+    "campaignProgress": "Campaign progress: {{percentage}}%",
+    "dateRangeRequired": "Please select a valid date range.",
+    "campaignNotFound": "Campaign not found."
+>>>>>>> a044960a30d (Fix: changes)
   },
   "pledges": {
     "title": "Fund Campaign Pledges",

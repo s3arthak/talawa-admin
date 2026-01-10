@@ -681,7 +681,15 @@
     "latestEndDate": "Fecha de finalización más reciente",
     "earliestEndDate": "Fecha de finalización más temprana",
     "lowestGoal": "Meta más baja",
+<<<<<<< HEAD
     "highestGoal": "Meta más alta"
+=======
+    "highestGoal": "Meta más alta",
+    "percentageRaised": "% Recaudado",
+    "campaignProgress": "Progreso de la campaña: {{percentage}}%",
+    "dateRangeRequired": "Por favor seleccione un rango de fechas válido.",
+    "campaignNotFound": "Campaña no encontrada."
+>>>>>>> a044960a30d (Fix: changes)
   },
   "pledges": {
     "title": "Compromisos de Campaña de Financiamiento",

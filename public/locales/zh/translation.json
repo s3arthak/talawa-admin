@@ -681,7 +681,15 @@
     "latestEndDate": "最新结束日期",
     "earliestEndDate": "最早结束日期",
     "lowestGoal": "最低目标",
+<<<<<<< HEAD
     "highestGoal": "最高目标"
+=======
+    "highestGoal": "最高目标",
+    "percentageRaised": "% 已筹集",
+    "campaignProgress": "活动进度: {{percentage}}%",
+    "dateRangeRequired": "请选择一个有效的日期范围。",
+    "campaignNotFound": "未找到活动。"
+>>>>>>> a044960a30d (Fix: changes)
   },
   "pledges": {
     "title": "基金活动承诺",

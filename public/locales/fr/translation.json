@@ -681,7 +681,15 @@
     "latestEndDate": "Dernière date de fin",
     "earliestEndDate": "Date de fin la plus ancienne",
     "lowestGoal": "Objectif le plus bas",
+<<<<<<< HEAD
     "highestGoal": "Objectif le plus élevé"
+=======
+    "highestGoal": "Objectif le plus élevé",
+    "percentageRaised": "% Collecté",
+    "campaignProgress": "Progression de la campagne: {{percentage}}%",
+    "dateRangeRequired": "Veuillez sélectionner une plage de dates valide.",
+    "campaignNotFound": "Campagne introuvable."
+>>>>>>> a044960a30d (Fix: changes)
   },
   "pledges": {
     "title": "Engagements de campagne de financement",

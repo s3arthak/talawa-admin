@@ -681,7 +681,15 @@
     "latestEndDate": "अंतिम समाप्ति तिथि",
     "earliestEndDate": "सबसे पहली समाप्ति तिथि",
     "lowestGoal": "सबसे कम उद्देश्य",
+<<<<<<< HEAD
     "highestGoal": "सबसे ऊंचा उद्देश्य"
+=======
+    "highestGoal": "सबसे ऊंचा उद्देश्य",
+    "percentageRaised": "% एकत्रित",
+    "campaignProgress": "अभियान प्रगति: {{percentage}}%",
+    "dateRangeRequired": "कृपया एक मान्य तारीख सीमा चुनें।",
+    "campaignNotFound": "अभियान नहीं मिला।"
+>>>>>>> a044960a30d (Fix: changes)
   },
   "pledges": {
     "title": "निधि अभियान प्रतिज्ञाएँ",

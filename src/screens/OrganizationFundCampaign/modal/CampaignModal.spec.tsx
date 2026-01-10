@@ -9,6 +9,7 @@ import {
   render,
   screen,
   waitFor,
+  within,
 } from '@testing-library/react';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -35,6 +36,92 @@ vi.mock('@mui/x-date-pickers/DateTimePicker', async () => {
   return { DateTimePicker: actual.DesktopDateTimePicker };
 });
 
+<<<<<<< HEAD:src/screens/OrganizationFundCampaign/modal/CampaignModal.spec.tsx
+=======
+vi.mock('shared-components/BaseModal/BaseModal', () => ({
+  __esModule: true,
+  default: ({
+    children,
+    show,
+    onHide,
+    title,
+    dataTestId,
+  }: {
+    children: React.ReactNode;
+    show: boolean;
+    onHide: () => void;
+    title: string;
+    dataTestId?: string;
+  }) =>
+    show ? (
+      <div data-testid={dataTestId ?? 'base-modal'}>
+        <h2 data-testid="modal-title">{title}</h2>
+        <button type="button" data-testid="modalCloseBtn" onClick={onHide}>
+          close
+        </button>
+        {children}
+      </div>
+    ) : null,
+}));
+
+type DateRangeValue = {
+  startDate: Date | null;
+  endDate: Date | null;
+};
+
+const formatDateForInput = (date: Date) => dayjs.utc(date).format('DD/MM/YYYY');
+
+type DateRangePickerProps = {
+  value: DateRangeValue | null;
+  onChange: (value: DateRangeValue) => void;
+  dataTestId: string;
+};
+vi.mock('shared-components/DateRangePicker', async () => {
+  const actual = await vi.importActual<
+    typeof import('shared-components/DateRangePicker')
+  >('shared-components/DateRangePicker');
+
+  return {
+    __esModule: true,
+    ...actual, // keeps LocalizationProvider + AdapterDayjs
+
+    default: ({ value, onChange, dataTestId }: DateRangePickerProps) => (
+      <div data-testid={dataTestId}>
+        <input
+          data-testid={`${dataTestId}-start-input`}
+          value={value?.startDate ? formatDateForInput(value.startDate) : ''}
+          onChange={(e) => {
+            const nextStart = e.target.value
+              ? dayjs(e.target.value, 'DD/MM/YYYY').toDate()
+              : null;
+
+            onChange({
+              startDate: nextStart,
+              endDate:
+                value?.endDate && nextStart && nextStart > value.endDate
+                  ? nextStart
+                  : (value?.endDate ?? null),
+            });
+          }}
+        />
+        <input
+          data-testid={`${dataTestId}-end-input`}
+          value={value?.endDate ? formatDateForInput(value.endDate) : ''}
+          onChange={(e) =>
+            onChange({
+              startDate: value?.startDate ?? null,
+              endDate: e.target.value
+                ? dayjs(e.target.value, 'DD/MM/YYYY').toDate()
+                : null,
+            })
+          }
+        />
+      </div>
+    ),
+  };
+});
+
+>>>>>>> a044960a30d (Fix: changes):src/screens/AdminPortal/OrganizationFundCampaign/modal/CampaignModal.spec.tsx
 const link1 = new StaticMockLink(MOCKS);
 const link2 = new StaticMockLink(MOCK_ERROR);
 const translations = JSON.parse(
@@ -193,15 +280,27 @@ const currencyOnlyMockLink = new StaticMockLink(UPDATE_CURRENCY_ONLY_MOCK);
 
 describe('CampaignModal', () => {
   afterEach(() => {
-    vi.clearAllMocks();
+    vi.restoreAllMocks();
     cleanup();
   });
 
   it('should populate form fields with correct values in edit mode', async () => {
     renderCampaignModal(link1, campaignProps[1]);
+<<<<<<< HEAD:src/screens/OrganizationFundCampaign/modal/CampaignModal.spec.tsx
     await waitFor(() =>
       expect(screen.getAllByText(translations.updateCampaign)).toHaveLength(2),
     );
+=======
+    const modal = screen.getByTestId('campaignModal');
+
+    await waitFor(() => {
+      expect(
+        within(modal).getByRole('heading', {
+          name: translations.updateCampaign,
+        }),
+      ).toBeInTheDocument();
+    });
+>>>>>>> a044960a30d (Fix: changes):src/screens/AdminPortal/OrganizationFundCampaign/modal/CampaignModal.spec.tsx
 
     expect(screen.getByLabelText(translations.campaignName)).toHaveValue(
       'Campaign 1',
@@ -471,8 +570,20 @@ describe('CampaignModal', () => {
     renderCampaignModal(link1, autoUpdateDateProps);
 
     // Verify initial dates
+<<<<<<< HEAD:src/screens/OrganizationFundCampaign/modal/CampaignModal.spec.tsx
     expect(screen.getByLabelText('Start Date')).toHaveValue('01/01/2025');
     expect(screen.getByLabelText('End Date')).toHaveValue('01/02/2025');
+=======
+    const startDateInput = getStartDateInput();
+    const endDateInput = getEndDateInput();
+
+    expect(startDateInput).toHaveValue(
+      formatDateForInput(autoUpdateDateProps.campaign?.startAt),
+    );
+    expect(endDateInput).toHaveValue(
+      dayjs.utc(autoUpdateDateProps.campaign?.endAt).format('DD/MM/YYYY'),
+    );
+>>>>>>> a044960a30d (Fix: changes):src/screens/AdminPortal/OrganizationFundCampaign/modal/CampaignModal.spec.tsx
 
     // Change start date to a date AFTER the current end date
     const startDateInput = screen.getByLabelText('Start Date');
@@ -502,8 +613,19 @@ describe('CampaignModal', () => {
     renderCampaignModal(link1, keepEndDateProps);
 
     // Verify initial dates
+<<<<<<< HEAD:src/screens/OrganizationFundCampaign/modal/CampaignModal.spec.tsx
     expect(screen.getByLabelText('Start Date')).toHaveValue('01/01/2025');
     expect(screen.getByLabelText('End Date')).toHaveValue('01/04/2025');
+=======
+    const startDateInput = getStartDateInput();
+    const endDateInput = getEndDateInput();
+    expect(startDateInput).toHaveValue(
+      formatDateForInput(keepEndDateProps.campaign?.startAt),
+    );
+    expect(endDateInput).toHaveValue(
+      dayjs.utc(keepEndDateProps.campaign?.endAt).format('DD/MM/YYYY'),
+    );
+>>>>>>> a044960a30d (Fix: changes):src/screens/AdminPortal/OrganizationFundCampaign/modal/CampaignModal.spec.tsx
 
     // Change start date to a date that is still BEFORE the end date
     const startDateInput = screen.getByLabelText('Start Date');
